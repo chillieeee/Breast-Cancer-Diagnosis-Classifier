@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Breast Cancer Diagnosis Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="app-shell">
+        <header class="app-header">
+            <div class="header-icon">🩺</div>
+            <div>
+                <h1>Breast Cancer Diagnosis Classifier</h1>
+                <p class="subtitle">ML-assisted analysis of cell nuclei measurements</p>
+            </div>
+        </header>
+
+        <div class="sample-bar">
+            <span class="sample-label">Quick test:</span>
+            <button type="button" class="sample-btn malignant-btn" id="load-malignant">Load Malignant Sample</button>
+            <button type="button" class="sample-btn benign-btn" id="load-benign">Load Benign Sample</button>
+            <button type="button" class="sample-btn clear-btn" id="clear-form">Clear</button>
+        </div>
+
+        <form id="predict-form">
+            <div class="section" id="section-mean">
+                <h3 class="section-title">Mean Values</h3>
+                <div class="grid" id="grid-mean"></div>
+            </div>
+            <div class="section" id="section-error">
+                <h3 class="section-title">Standard Error Values</h3>
+                <div class="grid" id="grid-error"></div>
+            </div>
+            <div class="section" id="section-worst">
+                <h3 class="section-title">Worst (Largest) Values</h3>
+                <div class="grid" id="grid-worst"></div>
+            </div>
+
+            <button type="submit" class="predict-btn" id="predict-btn">
+                <span class="btn-text">Analyze</span>
+                <span class="btn-spinner hidden" id="btn-spinner"></span>
+            </button>
+        </form>
+
+        <div id="result" class="result-box hidden">
+            <div class="result-icon" id="result-icon"></div>
+            <h2 id="result-label"></h2>
+            <p id="result-confidence"></p>
+            <div class="confidence-bar-track">
+                <div class="confidence-bar-fill" id="confidence-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const FEATURE_NAMES = {{ feature_names | tojson }};
+    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+
+</html>
